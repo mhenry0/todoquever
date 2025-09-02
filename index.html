@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TOD: Todo que ver aqui</title>
+  <!-- AOS CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Bootstrap 5.3.x (usa 5.3.3; podés cambiar a cualquier 5.3.x) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <!-- Leaflet -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+
+
+
+
+
+  <style>
+    .body { font-family: 'Lato', sans-serif; }
+    html, body { height: 100%; }
+    #map { height: 70vh; border-radius: 1rem; }
+    .category-dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; margin-right: .4rem; }
+    .leaflet-popup-content-wrapper { border-radius: .75rem; }
+    .marker-hotel { background: #1d4ed8; }
+    .marker-rest { background: #059669; }
+    .marker-trans { background: #eab308; }
+    .marker-tour { background: #dc2626; }
+    .sticky-card { position: sticky; top: 1rem; }
+    /* Etiqueta fija encima del punto */
+    
+
+.leaflet-tooltip.biz-label {
+  background: rgba(255,255,255,0.9);
+  border: 0;
+  border-radius: .5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  padding: 2px 6px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: #111;
+}
+.leaflet-tooltip.biz-label::before { display: none; } /* sin flechita */
+
+
+/* Enlaces sin subrayado para acciones */
+.link-plain { text-decoration: none !important; color: #000000; }
+.link-plain:hover { text-decoration: none !important; opacity: .85; }
+
+/* Imagen arriba de la card */
+.card-img-top.biz-cover {
+  height: 140px;
+  object-fit: cover;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+/* Imagen dentro del popup del mapa */
+.leaflet-popup-content img.biz-popup {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+}
+
+/* Logo del navbar */
+.navbar-brand .navbar-logo{
+  height: 28px; width: auto;
+  display: block;
+}
+.navbar .nav-link{ font-weight: 600; font-family: 'Lato', sans-serif; }
+
+
+  </style>
+</head>
+
+<body class="bg-light">
+
+
+
+  <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
+  <div class="container">
+    <!-- Marca con logo -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <!-- Cambiá la ruta del logo por la tuya -->
+      <img src="/assets/logo-quever.svg" alt="¡Todo Que Ver!" class="navbar-logo">
+      <span class="fw-semibold">¡Todo Que Ver!</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Alternar navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <!-- Ítems de navegación a la derecha -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+<section id="sobre" class="py-5 bg-light border-top">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h2 class="fw-bold hb-4" data-aos="fade-up">
+          Sobre <span class="text-primary">Todo que Ver</span>
+        </h2>
+
+        <p class="lead text-dark" data-aos="fade-up" data-aos-delay="500">
+          <strong>Todo que Ver</strong> nace como una alternativa frente al proceso creciente de 
+          <em>gentrificación</em> que viven muchas comunidades en Costa Rica. 
+          Este proyecto resalta lo nuestro: <strong>negocios nacionales verificados</strong>.
+        </p>
+
+        <p class="lead text-dark" data-aos="fade-up" data-aos-delay="1000">
+          Aquí encontrarás <strong>hoteles, restaurantes, transporte privado y tour operadores</strong> 
+          100% costarricenses, impulsados por familias y emprendedores locales. 
+          Más que un simple directorio, <em>Todo que Ver</em> es un puente entre quienes buscan experiencias auténticas 
+          y quienes las ofrecen con dedicación y arraigo cultural.
+        </p>
+
+        <p class=" lead text-darl mb-4" data-aos="fade-up" data-aos-delay="1500">
+          Cada visita, reserva o consumo se convierte en un acto de apoyo a la economía local 
+          y una forma de resistir la homogenización que trae la gentrificación. 
+          Aquí celebramos la <strong>identidad costarricense</strong>, 
+          el talento emprendedor y la riqueza de nuestras comunidades.
+        </p>
+
+        <a href="#map" class="btn btn-primary btn-lg rounded-pill" style="background: linear-gradient(120deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%); border-color: linear-gradient(120deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%);
+;
+" data-aos="zoom-in" data-aos-delay="2000">
+          <i class="bi bi-search me-2"></i>Explorar negocios
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <main class="container my-4">
+
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="card sticky-card shadow-sm">
+          <div class="card-body">
+            <h1 class="h4 mb-3">Negocios nacionales</h1>
+            <p class="text-secondary mb-3">Hotelería, restaurantes, transporte privado y tour operadores. Solo negocios costarricenses verificados.</p>
+
+      
+
+            <div class="mb-2"><small class="text-secondary">Categorías</small></div>
+            <div class="d-flex flex-wrap gap-2 mb-3" id="catBtns"></div>
+            <div class="d-flex gap-2 mb-3">
+              <button id="allBtn" class="btn btn-outline-secondary btn-sm">Todas</button>
+              <button id="noneBtn" class="btn btn-outline-secondary btn-sm">Ninguna</button>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div><small class="text-secondary">Resultados</small></div>
+              <div class="text-secondary"><small id="countSpan">0</small></div>
+            </div>
+            <div id="list" class="vstack gap-2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div id="map" class="shadow"></div>
+      </div>
+    </div>
+  </main>
+
+ 
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- App: Vanilla JS + Supabase (ESM) -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    // ---- Categorías ----
+    const CATS = [
+      { id: 'hoteleria', name: 'Hotelería', color: '#1d4ed8', dot: 'marker-hotel' },
+      { id: 'restaurante', name: 'Restaurante', color: '#059669', dot: 'marker-rest' },
+      { id: 'transporte', name: 'Transporte privado', color: '#eab308', dot: 'marker-trans' },
+      { id: 'tour', name: 'Tour operador', color: '#dc2626', dot: 'marker-tour' },
+    ];
+
+    // ---- Fallback demo data ----
+  const DEMO = [
+  { id: 1, name: 'Hotel Bahía Azul', category: 'hoteleria', lat: 9.1546, lng: -83.7393, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', verified: true, is_national: true, image: 'https://picsum.photos/seed/hotel-bahia-azul/800/450' },
+  { id: 2, name: 'Soda Tica Doña Mary', category: 'restaurante', lat: 9.1632, lng: -83.7412, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 2222', whatsapp: '88882222', website: '', verified: true, is_national: true, image: 'https://picsum.photos/seed/soda-dona-mary/800/450' },
+  { id: 3, name: 'Uvita Private Rides', category: 'transporte', lat: 9.154, lng: -83.736, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 3333', whatsapp: '88883333', website: 'https://wa.me/50688883333', verified: true, is_national: true, image: 'https://picsum.photos/seed/uvita-private-rides/800/450' },
+  { id: 4, name: 'Ballena Tours CR', category: 'tour', lat: 9.1599, lng: -83.742, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 4444', whatsapp: '88884444', website: 'https://example.com', verified: true, is_national: true, image: 'https://picsum.photos/seed/ballena-tours-cr/800/450' },
+];
+
+
+    // ---- State ----
+    let items = [...DEMO];
+    
+// antes: let activeCats = new Set(CATS.map(c => c.id));
+let activeCats = new Set();
+    let markers = [];
+
+
+
+    // ---- Elements ----
+    const modeAlert = document.getElementById('modeAlert');
+    const listEl = document.getElementById('list');
+    const countSpan = document.getElementById('countSpan');
+const searchInput = document.getElementById('searchInput'); // puede no existir
+if (searchInput) searchInput.addEventListener('input', () => render());
+
+    // ---- Map ----
+    const map = L.map('map');
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' });
+    osm.addTo(map);
+    map.setView([9.1546, -83.7393], 11);
+
+    // click-to-fill coords for suggestion modal
+    map.on('click', (e) => {
+      document.getElementById('latInput').value = e.latlng.lat.toFixed(6);
+      document.getElementById('lngInput').value = e.latlng.lng.toFixed(6);
+    });
+
+    // ---- Category buttons ----
+    const catBtns = document.getElementById('catBtns');
+    CATS.forEach((c) => {
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-sm btn-outline-primary';
+      btn.innerHTML = `<span class="category-dot" style="background:${c.color}"></span>${c.name}`;
+      btn.dataset.id = c.id;
+      btn.onclick = () => {
+        if (activeCats.has(c.id)) activeCats.delete(c.id); else activeCats.add(c.id);
+        btn.classList.toggle('btn-outline-primary');
+        btn.classList.toggle('btn-primary');
+        render();
+      };
+      // start active
+  
+      catBtns.appendChild(btn);
+    });
+    document.getElementById('allBtn').onclick = () => { activeCats = new Set(CATS.map(c => c.id)); [...catBtns.children].forEach(b=>{b.classList.add('btn-primary'); b.classList.remove('btn-outline-primary');}); render(); };
+    document.getElementById('noneBtn').onclick = () => { activeCats = new Set(); [...catBtns.children].forEach(b=>{b.classList.add('btn-outline-primary'); b.classList.remove('btn-primary');}); render(); };
+
+    searchInput.addEventListener('input', () => render());
+
+    // ---- Supabase connection ----
+    function getCreds(){
+      return {
+        url: localStorage.getItem('SUPABASE_URL') || '',
+        key: localStorage.getItem('SUPABASE_ANON_KEY') || ''
+      };
+    }
+    let sb = null;
+    async function tryConnect(){
+      const { url, key } = getCreds();
+      if (!url || !key) { modeAlert.classList.remove('d-none'); return; }
+      sb = createClient(url, key);
+      modeAlert.classList.add('d-none');
+      await loadBusinesses();
+    }
+
+    async function loadBusinesses(){
+      try {
+        const { data, error } = await sb
+          .from('business')
+          .select('id, name, category, lat, lng, canton, province, phone, whatsapp, website, verified, is_national')
+          .eq('verified', true)
+          .eq('is_national', true)
+          .limit(2000);
+        if (error) throw error;
+        items = data && data.length ? data : DEMO;
+        render();
+      } catch (e) {
+        console.warn('Fallo al cargar negocios, usando demo', e);
+        items = [...DEMO];
+        modeAlert.classList.remove('d-none');
+        render();
+      }
+    }
+    
+
+    // ---- Render list + markers ----
+    function makeWaLink(raw, msg='Hola, vi tu contacto en el directorio 🇨🇷'){
+      const digits = (raw||'').replace(/\D/g,'');
+      if (!digits) return '#';
+      const cr = digits.startsWith('506') ? digits : `506${digits}`;
+      return `https://wa.me/${cr}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function render(){
+      // filter
+  const q = (searchInput?.value || '').trim().toLowerCase();
+
+const filtered = items.filter(b => {
+  const inCat = activeCats.has(b.category);
+  // si no hay buscador, no se filtra por texto
+  const inQuery = !searchInput || !q
+    || b.name.toLowerCase().includes(q)
+    || (b.canton || '').toLowerCase().includes(q)
+    || (b.province || '').toLowerCase().includes(q);
+
+  return inCat && inQuery;
+});
+
+
+      
+      // list
+      listEl.innerHTML = '';
+      filtered.forEach(b => {
+        const cat = CATS.find(c=>c.id===b.category);
+const card = document.createElement('div');
+card.className = 'card border-0 shadow-sm';
+card.innerHTML = `
+  ${b.image ? `<img loading="lazy" src="${b.image}" alt="Foto de ${b.name}" class="card-img-top biz-cover">` : ''}
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start">
+      <h6 class="card-title mb-1">${b.name}</h6>
+      <span class="badge" style="background:${cat.color}">${cat.name}</span>
+    </div>
+    <div class="text-secondary small mb-2">${b.canton || ''}${b.canton?', ':''}${b.province || ''}</div>
+    <div class="d-flex flex-wrap gap-3 small">
+      ${b.phone ? `<a class="link-plain" href="tel:${b.phone.replace(/\s/g,'')}"><i class="bi bi-telephone me-1"></i>Llamar</a>` : ''}
+      ${b.whatsapp ? `<a class="link-plain" target="_blank" rel="noreferrer" href="${makeWaLink(b.whatsapp)}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>` : ''}
+      <a class="link-plain" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}"><i class="bi bi-geo-alt me-1"></i>Cómo llegar</a>
+      ${b.website ? `<a class="link-plain" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
+    </div>
+  </div>`;
+
+
+        // focus on click
+        card.onclick = () => { map.setView([b.lat, b.lng], 14); };
+        listEl.appendChild(card);
+      });
+
+     // markers
+markers.forEach(m => map.removeLayer(m));
+markers = [];
+const group = L.featureGroup();
+
+filtered.forEach(b => {
+  const cat = CATS.find(c=>c.id===b.category);
+  const marker = L.circleMarker([b.lat, b.lng], {
+    radius: 8,
+    color: cat.color,
+    fillColor: cat.color,
+    fillOpacity: .85,
+    weight: 1
+  })
+.bindPopup(`
+  ${b.image ? `<img loading="lazy" src="${b.image}" alt="Foto de ${b.name}" class="biz-popup">` : ''}
+  <div class='fw-semibold mb-1'>${b.name}</div>
+  <div class='text-secondary small mb-2'>${b.canton || ''}${b.canton?', ':''}${b.province || ''}</div>
+  <div class='d-flex flex-wrap gap-3 small'>
+    ${b.phone ? `<a class="text-decoration-none" href="tel:${b.phone.replace(/\s/g,'')}"><i class="bi bi-telephone me-1"></i>Llamar</a>` : ''}
+    ${b.whatsapp ? `<a class="text-decoration-none" target="_blank" rel="noreferrer" href="${makeWaLink(b.whatsapp)}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>` : ''}
+    <a class="text-decoration-none" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}"><i class="bi bi-geo-alt me-1"></i>Cómo llegar</a>
+    ${b.website ? `<a class="text-decoration-none" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
+  </div>
+`)
+
+
+  /* === NOMBRE SIEMPRE VISIBLE === */
+  .bindTooltip(b.name, {
+    permanent: true,
+    direction: 'top',
+    offset: [0, -10],
+    className: 'biz-label'
+  });
+
+  marker.addTo(map);
+  group.addLayer(marker);
+  markers.push(marker);
+});
+
+if (filtered.length) map.fitBounds(group.getBounds(), { padding: [40, 40] });
+
+      
+    }
+
+    
+    
+
+    // initial render
+    render();
+
+    // ---- Settings modal ----
+    const sbUrl = document.getElementById('sbUrl');
+    const sbKey = document.getElementById('sbKey');
+    sbUrl.value = localStorage.getItem('SUPABASE_URL') || '';
+    sbKey.value = localStorage.getItem('SUPABASE_ANON_KEY') || '';
+    document.getElementById('saveSettingsBtn').onclick = () => {
+      localStorage.setItem('SUPABASE_URL', sbUrl.value.trim());
+      localStorage.setItem('SUPABASE_ANON_KEY', sbKey.value.trim());
+      location.reload();
+    };
+
+   
+  </script>
+
+  <!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,   // duración de la animación en ms
+    once: true        // animar solo una vez al hacer scroll
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="cta-ocean py-5">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <div class="glass-card p-4 p-lg-5" data-aos="fade-up">
+          <h2 class="fw-bold mb-3">¿Te gustaría agregar tu negocio?</h2>
+          <p class="lead mb-4">
+            Escríbenos a 
+   WhatsApp
+            </a> 
+            y conversemos.
+          </p>
+
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a class="btn btn-ghost-light btn-lg" 
+               href="https://wa.me/50688880000?text=Hola%2C%20quiero%20agregar%20mi%20negocio%20a%20Todo%20que%20Ver"
+               target="_blank" rel="noreferrer" aria-label="Escribir por WhatsApp">
+              <i class="bi bi-whatsapp me-2"></i> WhatsApp
+            </a>
+
+          </div>
+       
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  /* CTA azul + verde */
+.cta-ocean {
+  position: relative;
+  color: #fff;
+background: linear-gradient(120deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%);
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
+}
+.cta-ocean .glass-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(6px);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* Botones */
+.btn-ghost-light {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 999px;
+}
+.btn-ghost-light:hover { 
+  background: rgba(255,255,255,.08); 
+  color: #fff; 
+  border-color: #fff;
+}
+.btn-ink {
+  background: #fff;
+  color: #0f172a;
+  border: 1px solid #fff;
+  border-radius: 999px;
+}
+.btn-ink:hover { 
+  background: #f8fafc; 
+  color: #0f172a;
+}
+
+/* Link blanco con subrayado sutil */
+.link-white-underline {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.6);
+}
+.link-white-underline:hover { text-decoration-color: #fff; }
+
+</style>
+
+
+<style>
+  .footer {
+  position: relative;
+  color: #fff;
+  background: url('/img/footerbg.jpg') center/cover no-repeat; /* <-- Cambiá la ruta */
+  height: 80vh;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.144); /* capa oscura encima de la imagen */
+}
+
+.footer .container {
+  position: relative;
+  z-index: 1; /* asegura que el contenido esté encima del overlay */
+}
+
+.footer-logo {
+  height: 200px;
+  width: auto;
+}
+.footer a {
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+</style>
+
+<footer class="footer pt-5 pb-4 mt-0" style="font-family: 'Lato', sans-serif;">
+  <div class="container">
+    <div class="row gy-4 justify-content-center text-center">
+      <!-- Logo + descripción -->
+      <div class="col-lg-6">
+        <a href="#" class="d-flex justify-content-center align-items-center gap-2 mb-3">
+          <img src="/assets/logo-quever.svg" alt="Todo que Ver" class="footer-logo">
+        </a>
+        <p class="small">
+          El directorio digital de <strong>negocios costarricenses verificados</strong>.  
+          Hoteles, restaurantes, transporte privado y tour operadores.  
+          Hecho en Costa Rica, para Costa Rica.
+        </p>
+      </div>
+    </div>
+
+    <!-- Línea inferior -->
+    <hr class="border-light mt-4">
+    <div class="text-center small text-light">
+      © <span id="year"></span> Todo que Ver · Hecho en Costa Rica por <a href="https://www.nativainnovations.com/" target="_blank" style="color: #ffffff;"> Nativa Innovations</a>  
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
+
+
+<script>
+  // Año automático en el footer
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
