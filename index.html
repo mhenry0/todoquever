@@ -76,12 +76,19 @@
   margin-bottom: .5rem;
 }
 
-/* Logo del navbar */
-.navbar-brand .navbar-logo{
-  height: 28px; width: auto;
+.navbar-brand .navbar-logo {
+  height: 20px; /* tu tamaño base */
+  width: auto;
   display: block;
+  transform: scale(2.5); /* ×1.5 del tamaño original */
+  transform-origin: center; /* centra el escalado */
 }
-.navbar .nav-link{ font-weight: 600; font-family: 'Lato', sans-serif; }
+
+.card-img-top.biz-cover,
+.carousel-inner img {
+  height: 200px;   /* o 400px si las querés grandes */
+  object-fit: cover; /* mantiene la proporción y recorta el exceso */
+}
 
 
   </style>
@@ -96,7 +103,7 @@
     <!-- Marca con logo -->
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
       <!-- Cambiá la ruta del logo por la tuya -->
-      <img src="/assets/logo-quever.svg" alt="¡Ando Vineando!" class="navbar-logo">
+      <img src="/img/logo.png" alt="¡Ando Vineando!" class="navbar-logo">
       <span class="fw-semibold">¡Ando Vineando!</span>
     </a>
 
@@ -116,7 +123,7 @@
     <div class="row justify-content-center text-center">
       <div class="col-lg-8">
         <h2 class="fw-bold hb-4" data-aos="fade-up">
-          Sobre <span class="text-primary">¡Ando Vineando!</span>
+          ¡Bienvenidos a <span class="text-primary" style="margin-top: 50px; margin-bottom: 50px;">Ando Vineando!</span>
         </h2>
 
         <p class="lead text-dark" data-aos="fade-up" data-aos-delay="500">
@@ -202,14 +209,79 @@
     ];
 
     // ---- Fallback demo data ----
-  const DEMO = [
-  { id: 1, name: 'Hotel Bahía Azul', category: 'hoteleria', lat: 9.1546, lng: -83.7393, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', verified: true, is_national: true, image: 'https://picsum.photos/seed/hotel-bahia-azul/800/450' },
-  { id: 2, name: 'Soda Tica Doña Mary', category: 'restaurante', lat: 9.1632, lng: -83.7412, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 2222', whatsapp: '88882222', website: '', verified: true, is_national: true, image: 'https://picsum.photos/seed/soda-dona-mary/800/450' },
-  { id: 3, name: 'Uvita Private Rides', category: 'transporte', lat: 9.154, lng: -83.736, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 3333', whatsapp: '88883333', website: 'https://wa.me/50688883333', verified: true, is_national: true, image: 'https://picsum.photos/seed/uvita-private-rides/800/450' },
-  { id: 4, name: 'Ballena Tours CR', category: 'tour', lat: 9.1599, lng: -83.742, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 4444', whatsapp: '88884444', website: 'https://example.com', verified: true, is_national: true, image: 'https://picsum.photos/seed/ballena-tours-cr/800/450' },
-  { id: 5, name: 'La Galería Tropical', category: 'galeria de arte', lat: 9.1645, lng: -83.7393, canton: 'Osa', province: 'Puntarenas', phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', verified: true, is_national: true, image: 'https://picsum.photos/seed/hotel-bahia-azul/800/450' },
-
+const DEMO = [
+  { 
+    id: 1, 
+    name: 'Hotel Bahía Azul', 
+    category: 'hoteleria', 
+    lat: 9.1546, lng: -83.7393, 
+    canton: 'Osa', province: 'Puntarenas', 
+    phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', 
+    verified: true, is_national: true, 
+    images: [
+      'https://picsum.photos/seed/hotel-bahia-azul1/800/450',
+      'https://picsum.photos/seed/hotel-bahia-azul2/800/450',
+      'https://picsum.photos/seed/hotel-bahia-azul3/800/450'
+    ]
+  },
+  { 
+    id: 2, 
+    name: 'Soda Tica Doña Mary', 
+    category: 'restaurante', 
+    lat: 9.1632, lng: -83.7412, 
+    canton: 'Osa', province: 'Puntarenas', 
+    phone: '+506 8888 2222', whatsapp: '88882222', website: '', 
+    verified: true, is_national: true, 
+    images: [
+      'https://picsum.photos/seed/soda-dona-mary1/800/450',
+      'https://picsum.photos/seed/soda-dona-mary2/800/450',
+      'https://picsum.photos/seed/soda-dona-mary3/800/450'
+    ]
+  },
+  { 
+    id: 3, 
+    name: 'Uvita Private Rides', 
+    category: 'transporte', 
+    lat: 9.154, lng: -83.736, 
+    canton: 'Osa', province: 'Puntarenas', 
+    phone: '+506 8888 3333', whatsapp: '88883333', website: 'https://wa.me/50688883333', 
+    verified: true, is_national: true, 
+    images: [
+      'https://picsum.photos/seed/uvita-private-rides1/800/450',
+      'https://picsum.photos/seed/uvita-private-rides2/800/450',
+      'https://picsum.photos/seed/uvita-private-rides3/800/450'
+    ]
+  },
+  { 
+    id: 4, 
+    name: 'Ballena Tours CR', 
+    category: 'tour', 
+    lat: 9.1599, lng: -83.742, 
+    canton: 'Osa', province: 'Puntarenas', 
+    phone: '+506 8888 4444', whatsapp: '88884444', website: 'https://example.com', 
+    verified: true, is_national: true, 
+    images: [
+      'https://picsum.photos/seed/ballena-tours-cr1/800/450',
+      'https://picsum.photos/seed/ballena-tours-cr2/800/450',
+      'https://picsum.photos/seed/ballena-tours-cr3/800/450'
+    ]
+  },
+  { 
+    id: 5, 
+    name: 'La Galería Tropical', 
+    category: 'galeria de arte', 
+    lat: 9.1645, lng: -83.7393, 
+    canton: 'Osa', province: 'Puntarenas', 
+    phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', 
+    verified: true, is_national: true, 
+    images: [
+      'https://picsum.photos/seed/galeria-tropical1/800/450',
+      'https://picsum.photos/seed/galeria-tropical2/800/450',
+      'https://picsum.photos/seed/galeria-tropical3/800/450'
+    ]
+  }
 ];
+
 
 
     // ---- State ----
@@ -330,7 +402,24 @@ const filtered = items.filter(b => {
 const card = document.createElement('div');
 card.className = 'card border-0 shadow-sm';
 card.innerHTML = `
-  ${b.image ? `<img loading="lazy" src="${b.image}" alt="Foto de ${b.name}" class="card-img-top biz-cover">` : ''}
+  <div id="carousel-${b.id}" class="carousel slide" >
+    <div class="carousel-inner">
+      ${b.images.map((img, i) => `
+        <div class="carousel-item ${i === 0 ? 'active' : ''}">
+          <img src="${img}" class="d-block w-100 card-img-top biz-cover" alt="Foto de ${b.name}">
+        </div>
+      `).join('')}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${b.id}" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-${b.id}" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
   <div class="card-body">
     <div class="d-flex justify-content-between align-items-start">
       <h6 class="card-title mb-1">${b.name}</h6>
@@ -343,7 +432,9 @@ card.innerHTML = `
       <a class="link-plain" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}"><i class="bi bi-geo-alt me-1"></i>Cómo llegar</a>
       ${b.website ? `<a class="link-plain" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
     </div>
-  </div>`;
+  </div>
+`;
+
 
 
         // focus on click
@@ -560,7 +651,7 @@ background: linear-gradient(120deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%);
       <!-- Logo + descripción -->
       <div class="col-lg-6">
         <a href="#" class="d-flex justify-content-center align-items-center gap-2 mb-3">
-          <img src="/assets/logo-quever.svg" alt="¡Ando Vineando!" class="footer-logo">
+          <img src="/img/logo.png" alt="¡Ando Vineando!" class="footer-logo">
         </a>
         <p class="small">
           El directorio digital de <strong>negocios costarricenses verificados</strong>.  
