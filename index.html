@@ -306,6 +306,82 @@ if (searchInput) searchInput.addEventListener('input', () => render());
     osm.addTo(map);
     map.setView([9.1546, -83.7393], 11);
 
+    // Crear el botón "Mi ubicación"
+const locateButton = L.control({ position: "topleft" });
+
+locateButton.onAdd = function(map) {
+  const button = L.DomUtil.create("button", "locate-button");
+  button.innerHTML = "📍 Mi ubicación";
+  button.style.backgroundColor = "#16a34a";
+  button.style.color = "white";
+  button.style.border = "none";
+  button.style.borderRadius = "8px";
+  button.style.padding = "8px 12px";
+  button.style.cursor = "pointer";
+  button.style.fontWeight = "bold";
+  button.style.boxShadow = "0 2px 4px rgba(0,0,0,0.3)";
+
+  button.onclick = function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        // ✅ Éxito
+        function(position) {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const accuracy = position.coords.accuracy;
+
+          // Centrar el mapa en la posición
+          const userLatLng = [lat, lng];
+          map.setView(userLatLng, 15);
+
+          // Marcador y círculo de precisión
+          L.marker(userLatLng)
+            .addTo(map)
+            .bindPopup(`📍 Estás aquí<br>Precisión: ${Math.round(accuracy)} m`)
+            .openPopup();
+
+          L.circle(userLatLng, {
+            radius: accuracy,
+            color: "#16a34a",
+            fillColor: "#86efac",
+            fillOpacity: 0.3
+          }).addTo(map);
+        },
+        // ⚠️ Error
+        function(error) {
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              alert("Debes permitir el acceso a tu ubicación para usar esta función.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              alert("No se pudo determinar tu ubicación.");
+              break;
+            case error.TIMEOUT:
+              alert("La solicitud de ubicación tardó demasiado.");
+              break;
+            default:
+              alert("Ocurrió un error al obtener tu ubicación.");
+          }
+        },
+        // ⚙️ Configuración
+        {
+          enableHighAccuracy: true,  // 🔹 Usa GPS si está disponible
+          timeout: 10000,            // 10 segundos máximo
+          maximumAge: 0
+        }
+      );
+    } else {
+      alert("Tu navegador no soporta geolocalización.");
+    }
+  };
+
+  return button;
+};
+
+// Añadir el botón al mapa
+locateButton.addTo(map);
+
+
     // click-to-fill coords for suggestion modal
     map.on('click', (e) => {
       document.getElementById('latInput').value = e.latlng.lat.toFixed(6);
@@ -528,6 +604,63 @@ if (filtered.length) map.fitBounds(group.getBounds(), { padding: [40, 40] });
 
 
 
+<section style="font-family: 'Poppins', sans-serif; background-color: #f7f9f8; padding: 60px 20px;">
+  <h2 style="text-align:center; font-size: 2rem; color:#14532d; margin-bottom: 1rem;">
+    🌿 Planes de membresía – AndoVineando Costa Rica
+  </h2>
+  <p style="text-align:center; color:#475569; max-width:650px; margin:0 auto 40px;">
+    Conectá tu negocio con el turismo responsable. Elige el plan que mejor se adapte a tus necesidades y sé parte de la red de emprendimientos locales verificados 🌎
+  </p>
+
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
+
+    <!-- Plan Gratuito -->
+    <div style="background-color:white; border:2px solid #d1d5db; border-radius:20px; width:320px; box-shadow:0 4px 10px rgba(0,0,0,0.05); padding:25px;">
+      <h3 style="color:#047857; text-align:center;">🟢 Plan Gratuito</h3>
+      <p style="text-align:center; color:#64748b;">Perfecto para empezar a formar parte del directorio.</p>
+      <ul style="list-style:none; padding:0; color:#374151; line-height:1.8;">
+        <li>✅ Inclusión en el mapa interactivo</li>
+        <li>✅ Nombre y categoría del negocio</li>
+        <li>✅ Sello de negocio costarricense verificado</li>
+        <li>❌ Sin enlace a WhatsApp o redes sociales</li>
+        <li>❌ Sin descripción ni foto personalizada</li>
+        <li>❌ No aparece en campañas promocionales</li>
+      </ul>
+      <div style="text-align:center; margin-top:20px;">
+        <button style="background-color:#047857; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
+          Registrarme Gratis
+        </button>
+      </div>
+    </div>
+
+    <!-- Plan Premium -->
+    <div style="background-color:white; border:3px solid #16a34a; border-radius:20px; width:340px; box-shadow:0 6px 15px rgba(0,0,0,0.1); padding:30px;">
+      <h3 style="color:#14532d; text-align:center;">🌟 Plan Premium</h3>
+      <h4 style="text-align:center; color:#15803d;">₡20,000 / mes</h4>
+      <p style="text-align:center; color:#64748b;">Tu negocio destacado con foto, contacto y promoción mensual.</p>
+      <ul style="list-style:none; padding:0; color:#374151; line-height:1.8;">
+        <li>✅ Prioridad en el mapa y búsquedas</li>
+        <li>✅ Foto real y descripción personalizada</li>
+        <li>✅ Enlace directo a WhatsApp, sitio web y redes</li>
+        <li>✅ Botón para ver menú o catálogo PDF</li>
+        <li>✅ Publicación mensual en redes sociales</li>
+        <li>✅ Estadísticas de visitas y clics</li>
+        <li>✅ Soporte personalizado vía WhatsApp</li>
+        <li>✅ Participación en campañas turísticas</li>
+      </ul>
+      <div style="text-align:center; margin-top:25px;">
+        <button style="background-color:#16a34a; color:white; border:none; padding:12px 25px; border-radius:10px; cursor:pointer; font-weight:bold;">
+          Unirme al Plan Premium
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center; margin-top:40px; color:#334155;">
+    💳 Pagos por SINPE Móvil o transferencia bancaria.  
+    <strong>10% de descuento</strong> por pago trimestral 🌺
+  </p>
+</section>
 
 
 <section class="cta-ocean py-5">
