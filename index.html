@@ -200,11 +200,27 @@
 
     // ---- Categorías ----
     const CATS = [
-      { id: 'hoteleria', name: 'Hotelería', color: '#1d4ed8', dot: 'marker-hotel' },
+      { id: 'Hospedaje', name: 'Hospedaje', color: '#30B8AA', dot: 'marker-hotel' },
       { id: 'restaurante', name: 'Restaurante', color: '#059669', dot: 'marker-rest' },
       { id: 'transporte', name: 'Transporte privado', color: '#eab308', dot: 'marker-trans' },
       { id: 'tour', name: 'Tour operador', color: '#dc2626', dot: 'marker-tour' },
       { id: 'galeria de arte', name: 'Galería de Arte', color: '#8fce00', dot: 'marker-galeria' },
+      { id: 'spa', name: 'Spa', color: '#BC3AF0', dot: 'marker-spa' },
+      { id: 'cafetería', name: 'Cafetería', color: '#C28559', dot: 'marker-cafeterias' },
+      { id: 'panadería', name: 'Panadería', color: '#DBC91A', dot: 'marker-spa' },
+      { id: 'heladería', name: 'Heladería', color: '#389C45', dot: 'marker-spa' },
+      { id: 'soda', name: 'Soda', color: '#08BBF7', dot: 'marker-spa' },
+      { id: 'comida internacional', name: 'Comida Internacional', color: '#350472', dot: 'marker-spa' },
+      { id: 'fotografía', name: 'Fotografía', color: '#6196FA', dot: 'marker-spa' },
+      { id: 'alquiler de vehiculos', name: 'Alquiler de Vehículos', color: '#030000', dot: 'marker-spa' },
+      { id: 'souvenirs', name: 'Souvenirs', color: '#C25353', dot: 'marker-spa' },
+      { id: 'productores locales', name: 'Productores Locales', color: '#53C253', dot: 'marker-spa' },
+      { id: 'limpieza', name: 'Servicio de limpieza', color: '#6E6E6E', dot: 'marker-spa' },
+      { id: 'mantenimiento', name: 'Mantenimiento', color: '#FF7400', dot: 'marker-spa' },
+      { id: 'idiomas', name: 'Enseñanza de Idiomas', color: '#8C00FF', dot: 'marker-spa' },
+      { id: 'veterinaria', name: 'Veterinaria', color: '#9EC229', dot: 'marker-spa' },
+      { id: 'mecanico', name: 'Mécanico', color: '#1AFF00', dot: 'marker-spa' },
+      { id: 'servicio legal', name: 'Servicio Legal', color: '#002AFF', dot: 'marker-spa' },
 
     ];
 
@@ -213,11 +229,15 @@ const DEMO = [
   { 
     id: 1, 
     name: 'Hotel Bahía Azul', 
-    category: 'hoteleria', 
+    category: 'Hospedaje', 
     lat: 9.1542, lng: -83.7393, 
     canton: 'Osa', province: 'Puntarenas', 
     phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', 
     verified: true, is_national: true, 
+    catalogo: "/pdfs/menudonamary.pdf",
+    facebook: "https://facebook.com/sodadonamary",
+    instagram: "https://instagram.com/sodadonamary",
+    tiktok: "https://www.tiktok.com/@sodadonamary",
     images: [
       'https://picsum.photos/seed/hotel-bahia-azul1/800/450',
       'https://picsum.photos/seed/hotel-bahia-azul2/800/450',
@@ -227,10 +247,14 @@ const DEMO = [
   { 
     id: 2, 
     name: 'Soda Tica Doña Mary', 
-    category: 'restaurante', 
+    category: 'soda', 
     lat: 9.1627, lng: -83.7412, 
     canton: 'Osa', province: 'Puntarenas', 
     phone: '+506 8888 2222', whatsapp: '88882222', website: 'https://example.com', 
+  catalogo: "/pdfs/menudonamary.pdf",
+    facebook: "https://facebook.com/sodadonamary",
+    instagram: "https://instagram.com/sodadonamary",
+    tiktok: "https://www.tiktok.com/@sodadonamary",
     verified: true, is_national: true, 
     images: [
       'https://picsum.photos/seed/soda-dona-mary1/800/450',
@@ -245,6 +269,10 @@ const DEMO = [
     lat: 9.154, lng: -83.736, 
     canton: 'Osa', province: 'Puntarenas', 
     phone: '+506 8888 3333', whatsapp: '88883333', website: 'https://wa.me/50688883333', 
+     catalogo: "/pdfs/menudonamary.pdf",
+    facebook: "https://facebook.com/sodadonamary",
+    instagram: "https://instagram.com/sodadonamary",
+    tiktok: "https://www.tiktok.com/@sodadonamary",
     verified: true, is_national: true, 
     images: [
       'https://picsum.photos/seed/uvita-private-rides1/800/450',
@@ -260,6 +288,10 @@ const DEMO = [
     canton: 'Osa', province: 'Puntarenas', 
     phone: '+506 8888 4444', whatsapp: '88884444', website: 'https://example.com', 
     verified: true, is_national: true, 
+     catalogo: "/pdfs/menudonamary.pdf",
+    facebook: "https://facebook.com/sodadonamary",
+    instagram: "https://instagram.com/sodadonamary",
+    tiktok: "https://www.tiktok.com/@sodadonamary",
     images: [
       'https://picsum.photos/seed/ballena-tours-cr1/800/450',
       'https://picsum.photos/seed/ballena-tours-cr2/800/450',
@@ -274,6 +306,10 @@ const DEMO = [
     canton: 'Osa', province: 'Puntarenas', 
     phone: '+506 8888 1111', whatsapp: '88881111', website: 'https://example.com', 
     verified: true, is_national: true, 
+     catalogo: "/pdfs/menudonamary.pdf",
+    facebook: "https://facebook.com/sodadonamary",
+    instagram: "https://instagram.com/sodadonamary",
+    tiktok: "https://www.tiktok.com/@sodadonamary",
     images: [
       'https://picsum.photos/seed/galeria-tropical1/800/450',
       'https://picsum.photos/seed/galeria-tropical2/800/450',
@@ -502,12 +538,28 @@ card.innerHTML = `
       <span class="badge" style="background:${cat.color}">${cat.name}</span>
     </div>
     <div class="text-secondary small mb-2">${b.canton || ''}${b.canton?', ':''}${b.province || ''}</div>
-    <div class="d-flex flex-wrap gap-3 small">
-      ${b.phone ? `<a class="link-plain" href="tel:${b.phone.replace(/\s/g,'')}"><i class="bi bi-telephone me-1"></i>Llamar</a>` : ''}
-      ${b.whatsapp ? `<a class="link-plain" target="_blank" rel="noreferrer" href="${makeWaLink(b.whatsapp)}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>` : ''}
-      <a class="link-plain" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}"><i class="bi bi-geo-alt me-1"></i>Cómo llegar</a>
-      ${b.website ? `<a class="link-plain" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
-    </div>
+  <div class="d-flex flex-wrap gap-3 small">
+  ${b.phone ? `<a onclick="registrarClick('${b.id}','Llamar')" class="link-plain" href="tel:${b.phone.replace(/\s/g,'')}"><i class="bi bi-telephone me-1"></i>Llamar</a>` : ''}
+  
+  ${b.whatsapp ? `<a onclick="registrarClick('${b.id}','WhatsApp')" class="link-plain" target="_blank" rel="noreferrer" href="${makeWaLink(b.whatsapp)}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>` : ''}
+  
+  <a onclick="registrarClick('${b.id}','Mapa')" class="link-plain" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}">
+    <i class="bi bi-geo-alt me-1"></i>Cómo llegar
+  </a>
+  
+  ${b.website ? `<a onclick="registrarClick('${b.id}','Sitio web')" class="link-plain" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
+  
+  ${b.catalogo ? `<a onclick="registrarClick('${b.id}','Catálogo PDF')" class="link-plain" target="_blank" rel="noreferrer" href="${b.catalogo}"><i class="bi bi-file-earmark-pdf me-1"></i>Ver catálogo</a>` : ''}
+  
+  ${b.facebook ? `<a onclick="registrarClick('${b.id}','Facebook')" class="link-plain" target="_blank" rel="noreferrer" href="${b.facebook}"><i class="bi bi-facebook me-1"></i>Facebook</a>` : ''}
+  
+  ${b.instagram ? `<a onclick="registrarClick('${b.id}','Instagram')" class="link-plain" target="_blank" rel="noreferrer" href="${b.instagram}"><i class="bi bi-instagram me-1"></i>Instagram</a>` : ''}
+  
+  ${b.tiktok ? `<a onclick="registrarClick('${b.id}','TikTok')" class="link-plain" target="_blank" rel="noreferrer" href="${b.tiktok}"><i class="bi bi-tiktok me-1"></i>TikTok</a>` : ''}
+</div>
+
+
+
   </div>
 `;
 
@@ -621,14 +673,20 @@ if (filtered.length) map.fitBounds(group.getBounds(), { padding: [40, 40] });
       <ul style="list-style:none; padding:0; color:#374151; line-height:1.8;">
         <li>✅ Inclusión en el mapa interactivo</li>
         <li>✅ Nombre y categoría del negocio</li>
+        <li>✅ Incluye solamente 2 fotografías</li>      
+        <li>✅ Enlace a WhatsApp</li>      
         <li>✅ Sello de negocio costarricense verificado</li>
-        <li>❌ Sin enlace a WhatsApp o redes sociales</li>
-        <li>❌ Sin descripción ni foto personalizada</li>
-        <li>❌ No aparece en campañas promocionales</li>
+        <li>✅ Enlace a WhatsApp</li>
+        <li>❌ No cuenta con enlaces externos a redes sociales, cómo llegar ni catálogo en PDF.</li>
+        <li>❌ No incluye estadísticas de visitas.</li>
+        <li>❌ No aparece en campañas promocionales.</li>
+        <li>❌ No tiene visibilidad internacional (solo en idioma español).</li>
+        <li>❌ No recibe alertas o reportes de rendimiento del perfil.</li>
+
       </ul>
       <div style="text-align:center; margin-top:20px;">
         <button style="background-color:#047857; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
-          Registrarme Gratis
+          Registrarme aquí
         </button>
       </div>
     </div>
@@ -639,18 +697,19 @@ if (filtered.length) map.fitBounds(group.getBounds(), { padding: [40, 40] });
       <h4 style="text-align:center; color:#15803d;">₡20,000 / mes</h4>
       <p style="text-align:center; color:#64748b;">Tu negocio destacado con foto, contacto y promoción mensual.</p>
       <ul style="list-style:none; padding:0; color:#374151; line-height:1.8;">
-        <li>✅ Prioridad en el mapa y búsquedas</li>
-        <li>✅ Foto real y descripción personalizada</li>
-        <li>✅ Enlace directo a WhatsApp, sitio web y redes</li>
+        <li>✅ Inclusión en el mapa interactivo</li>
+        <li>✅ Incluye 6 fotos y descripción personalizada</li>
+        <li>✅ Enlace directo a WhatsApp, llamar, sitio web, redes (Facebook, Instagram, TikTok), y cómo llegar.</li>
         <li>✅ Botón para ver menú o catálogo PDF</li>
-        <li>✅ Publicación mensual en redes sociales</li>
         <li>✅ Estadísticas de visitas y clics</li>
-        <li>✅ Soporte personalizado vía WhatsApp</li>
-        <li>✅ Participación en campañas turísticas</li>
+        <li>✅ Soporte personalizado vía WhatsApp (Prioridad)</li>
+        <li>✅ Participación en campañas de anuncios</li>
+        <li>✅ Edición flexible: pueden actualizar su información o fotos cuando quieran.</li>
+
       </ul>
-      <div style="text-align:center; margin-top:25px;">
+    <div style="text-align:center; margin-top:25px;">
         <button style="background-color:#16a34a; color:white; border:none; padding:12px 25px; border-radius:10px; cursor:pointer; font-weight:bold;">
-          Unirme al Plan Premium
+          Unirme al plan premium
         </button>
       </div>
     </div>
@@ -806,7 +865,42 @@ background: linear-gradient(120deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%);
 
   </div>
 </footer>
+<script>
+  // ================================
+// CONFIGURACIÓN SUPABASE
+// ================================
+const SUPABASE_URL = "https://lsmhlqbwemzkuxgcynka.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbWhscWJ3ZW16a3V4Z2N5bmthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NzI5ODAsImV4cCI6MjA3NTM0ODk4MH0.sr4r0lAKZkFVXBZhMuTJBjx3ALxAXa9rk7TZJWxjTBs;"
 
+// ================================
+// FUNCIÓN PARA REGISTRAR CLICS
+// ================================
+async function registrarClick(negocioId, elemento) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/clicks_negocios`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal"
+      },
+      body: JSON.stringify({
+        negocio_id: negocioId,
+        elemento: elemento,
+        fecha: new Date().toISOString(),
+        dispositivo: /Mobi|Android/i.test(navigator.userAgent)
+          ? "mobile"
+          : "desktop"
+      })
+    });
+    console.log(`✅ Click registrado: ${negocioId} – ${elemento}`);
+  } catch (error) {
+    console.error("❌ Error al registrar el clic:", error);
+  }
+}
+
+</script>
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
