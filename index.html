@@ -538,24 +538,25 @@ card.innerHTML = `
       <span class="badge" style="background:${cat.color}">${cat.name}</span>
     </div>
     <div class="text-secondary small mb-2">${b.canton || ''}${b.canton?', ':''}${b.province || ''}</div>
-  <div class="d-flex flex-wrap gap-3 small">
-  ${b.phone ? `<a onclick="registrarClick('${b.id}','Llamar')" class="link-plain" href="tel:${b.phone.replace(/\s/g,'')}"><i class="bi bi-telephone me-1"></i>Llamar</a>` : ''}
-  
-  ${b.whatsapp ? `<a onclick="registrarClick('${b.id}','WhatsApp')" class="link-plain" target="_blank" rel="noreferrer" href="${makeWaLink(b.whatsapp)}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>` : ''}
-  
-  <a onclick="registrarClick('${b.id}','Mapa')" class="link-plain" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}">
+
+<div class="d-flex flex-wrap gap-3 small">
+  ${b.phone ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','Llamar')" class="link-plain" href="tel:${b.phone.replace(/\s/g,'')}"><i class="bi bi-telephone me-1"></i>Llamar</a>` : ''}
+
+  ${b.whatsapp ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','WhatsApp')" class="link-plain" target="_blank" rel="noreferrer" href="${makeWaLink(b.whatsapp)}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a>` : ''}
+
+  <a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','Mapa')" class="link-plain" target="_blank" rel="noreferrer" href="https://maps.google.com/?q=${b.lat},${b.lng}">
     <i class="bi bi-geo-alt me-1"></i>Cómo llegar
   </a>
-  
-  ${b.website ? `<a onclick="registrarClick('${b.id}','Sitio web')" class="link-plain" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
-  
-  ${b.catalogo ? `<a onclick="registrarClick('${b.id}','Catálogo PDF')" class="link-plain" target="_blank" rel="noreferrer" href="${b.catalogo}"><i class="bi bi-file-earmark-pdf me-1"></i>Ver catálogo</a>` : ''}
-  
-  ${b.facebook ? `<a onclick="registrarClick('${b.id}','Facebook')" class="link-plain" target="_blank" rel="noreferrer" href="${b.facebook}"><i class="bi bi-facebook me-1"></i>Facebook</a>` : ''}
-  
-  ${b.instagram ? `<a onclick="registrarClick('${b.id}','Instagram')" class="link-plain" target="_blank" rel="noreferrer" href="${b.instagram}"><i class="bi bi-instagram me-1"></i>Instagram</a>` : ''}
-  
-  ${b.tiktok ? `<a onclick="registrarClick('${b.id}','TikTok')" class="link-plain" target="_blank" rel="noreferrer" href="${b.tiktok}"><i class="bi bi-tiktok me-1"></i>TikTok</a>` : ''}
+
+  ${b.website ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','Sitio web')" class="link-plain" target="_blank" rel="noreferrer" href="${b.website}"><i class="bi bi-globe2 me-1"></i>Sitio web</a>` : ''}
+
+  ${b.catalogo ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','Catálogo PDF')" class="link-plain" target="_blank" rel="noreferrer" href="${b.catalogo}"><i class="bi bi-file-earmark-pdf me-1"></i>Ver catálogo</a>` : ''}
+
+  ${b.facebook ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','Facebook')" class="link-plain" target="_blank" rel="noreferrer" href="${b.facebook}"><i class="bi bi-facebook me-1"></i>Facebook</a>` : ''}
+
+  ${b.instagram ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','Instagram')" class="link-plain" target="_blank" rel="noreferrer" href="${b.instagram}"><i class="bi bi-instagram me-1"></i>Instagram</a>` : ''}
+
+  ${b.tiktok ? `<a onclick="registrarClick('${b.name || b.nombre || 'Negocio sin nombre'}','TikTok')" class="link-plain" target="_blank" rel="noreferrer" href="${b.tiktok}"><i class="bi bi-tiktok me-1"></i>TikTok</a>` : ''}
 </div>
 
 
@@ -865,19 +866,23 @@ background: linear-gradient(120deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%);
 
   </div>
 </footer>
+
+
 <script>
   // ================================
-// CONFIGURACIÓN SUPABASE
+// CONFIGURACIÓN DE SUPABASE
 // ================================
-const SUPABASE_URL = "https://lsmhlqbwemzkuxgcynka.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbWhscWJ3ZW16a3V4Z2N5bmthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NzI5ODAsImV4cCI6MjA3NTM0ODk4MH0.sr4r0lAKZkFVXBZhMuTJBjx3ALxAXa9rk7TZJWxjTBs;"
+const SUPABASE_URL = "https://lsmhlqbwemzkuxgcynka.supabase.co"; // reemplaza
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbWhscWJ3ZW16a3V4Z2N5bmthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NzI5ODAsImV4cCI6MjA3NTM0ODk4MH0.sr4r0lAKZkFVXBZhMuTJBjx3ALxAXa9rk7TZJWxjTBs"; // reemplaza con tu anon public key
 
 // ================================
 // FUNCIÓN PARA REGISTRAR CLICS
 // ================================
 async function registrarClick(negocioId, elemento) {
+  console.log("registrarClick:", negocioId, elemento);
+
   try {
-    await fetch(`${SUPABASE_URL}/rest/v1/clicks_negocios`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/clicks_negocios`, {
       method: "POST",
       headers: {
         apikey: SUPABASE_KEY,
@@ -894,13 +899,29 @@ async function registrarClick(negocioId, elemento) {
           : "desktop"
       })
     });
-    console.log(`✅ Click registrado: ${negocioId} – ${elemento}`);
+
+    if (!res.ok) {
+      const msg = await res.text();
+      console.error("❌ Error al enviar a Supabase:", msg);
+      alert("Error al registrar el clic");
+    } else {
+      console.log(`✅ Clic registrado: ${negocioId} – ${elemento}`);
+    }
   } catch (error) {
-    console.error("❌ Error al registrar el clic:", error);
+    console.error("❌ Error general:", error);
   }
 }
 
 </script>
+
+
+
+
+
+
+
+
+
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
